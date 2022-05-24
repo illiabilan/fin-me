@@ -1,5 +1,5 @@
 # FinMe
 
-## Powered by Compose app for managing you money!
+## Powered by Compose app for managing your money!
 
 ### To be continued...
