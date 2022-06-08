@@ -11,6 +11,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.beelancrp.finme.ui_kit.theme.ButtonsShapes
@@ -22,7 +23,7 @@ fun PrimaryButton(
     shape: Shape = ButtonsShapes.large,
     onClick: () -> Unit
 ) {
-    val primaryButtonColors = ButtonDefaults.textButtonColors(
+    val primaryButtonColors = ButtonDefaults.buttonColors(
         MaterialTheme.colors.primary,
         MaterialTheme.colors.onPrimary
     )
@@ -39,6 +40,8 @@ fun PrimaryButton(
                 .fillMaxWidth()
                 .wrapContentHeight(),
             style = MaterialTheme.typography.h4,
+            fontWeight = FontWeight.SemiBold,
+            color = MaterialTheme.colors.onPrimary,
             textAlign = TextAlign.Center
         )
     }
@@ -51,7 +54,7 @@ fun SecondaryButton(
     shape: Shape = ButtonsShapes.large,
     onClick: () -> Unit
 ) {
-    val primaryButtonColors = ButtonDefaults.textButtonColors(
+    val primaryButtonColors = ButtonDefaults.buttonColors(
         MaterialTheme.colors.secondary,
         MaterialTheme.colors.onSecondary
     )
@@ -68,6 +71,8 @@ fun SecondaryButton(
                 .fillMaxWidth()
                 .wrapContentHeight(),
             style = MaterialTheme.typography.h4,
+            fontWeight = FontWeight.SemiBold,
+            color = MaterialTheme.colors.onSecondary,
             textAlign = TextAlign.Center
         )
     }
