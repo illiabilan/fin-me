@@ -1,4 +1,4 @@
-package com.beelancrp.finme.navigation
+package com.beelancrp.navigation.domain.model
 
 sealed class Navigation(
     val route: String

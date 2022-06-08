@@ -17,13 +17,16 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.beelancrp.finme.R
-import com.beelancrp.finme.onboard.data.OnboardItem
+import com.beelancrp.finme.onboard.domain.model.OnboardItem
 import com.beelancrp.finme.ui_kit.components.PrimaryLargeButton
 import com.beelancrp.finme.ui_kit.components.SecondaryLargeButton
 import com.beelancrp.finme.ui_kit.theme.Dark50
 import com.beelancrp.finme.ui_kit.theme.FinMeTheme
 import com.beelancrp.finme.ui_kit.theme.Light20
+import com.beelancrp.navigation.domain.model.Navigation
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.HorizontalPagerIndicator
@@ -31,7 +34,7 @@ import com.google.accompanist.pager.rememberPagerState
 
 @ExperimentalPagerApi
 @Composable
-fun OnboardScreen(viewModel: OnBoardViewModel = hiltViewModel()) {
+fun OnboardScreen(navController: NavController, viewModel: OnBoardViewModel = hiltViewModel()) {
     Box(modifier = Modifier.fillMaxSize()) {
         val pagerState = rememberPagerState()
         val onboardItemsState by viewModel.onBoardItemsState
@@ -67,7 +70,8 @@ fun OnboardScreen(viewModel: OnBoardViewModel = hiltViewModel()) {
                 modifier = Modifier
                     .padding(16.dp)
             ) {
-
+                viewModel.login()
+                navController.navigate(Navigation.Home.route)
             }
         }
     }
@@ -122,6 +126,7 @@ fun OnboardPage(item: OnboardItem) {
 @Composable
 fun Preview() {
     FinMeTheme {
-        OnboardScreen()
+        val nav = rememberNavController()
+        OnboardScreen(nav)
     }
 }

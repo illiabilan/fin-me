@@ -3,13 +3,19 @@ package com.beelancrp.finme.onboard
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.beelancrp.finme.R
-import com.beelancrp.finme.onboard.data.OnboardItem
+import com.beelancrp.finme.onboard.domain.model.OnboardItem
+import com.beelancrp.finme.onboard.domain.repository.OnBoardRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class OnBoardViewModel @Inject constructor() : ViewModel() {
+class OnBoardViewModel @Inject constructor(
+    private val onBoardRepository: OnBoardRepository
+) : ViewModel() {
 
     val onBoardItemsState: State<List<OnboardItem>> = mutableStateOf(
         listOf(
@@ -30,4 +36,10 @@ class OnBoardViewModel @Inject constructor() : ViewModel() {
             )
         )
     )
+
+    fun login() {
+        viewModelScope.launch(Dispatchers.IO) {
+            onBoardRepository.setUserLoggedIn()
+        }
+    }
 }

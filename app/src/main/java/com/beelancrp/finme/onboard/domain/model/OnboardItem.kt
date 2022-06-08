@@ -1,4 +1,4 @@
-package com.beelancrp.finme.onboard.data
+package com.beelancrp.finme.onboard.domain.model
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes

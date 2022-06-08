@@ -49,6 +49,7 @@ dependencies {
     implementation "androidx.activity:activity-compose:$activity_compose_version"
 
     implementation(project(":ui-kit"))
+    implementation(project(":navigation"))
 
     implementation "androidx.datastore:datastore-preferences:$data_store_version"
 
