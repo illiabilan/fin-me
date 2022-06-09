@@ -1,5 +1,8 @@
 package com.beelancrp.finme.onboard
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -22,7 +25,6 @@ import androidx.navigation.compose.rememberNavController
 import com.beelancrp.finme.R
 import com.beelancrp.finme.onboard.domain.model.OnboardItem
 import com.beelancrp.finme.ui_kit.components.PrimaryLargeButton
-import com.beelancrp.finme.ui_kit.components.SecondaryLargeButton
 import com.beelancrp.finme.ui_kit.theme.Dark50
 import com.beelancrp.finme.ui_kit.theme.FinMeTheme
 import com.beelancrp.finme.ui_kit.theme.Light20
@@ -39,39 +41,49 @@ fun OnboardScreen(navController: NavController, viewModel: OnBoardViewModel = hi
         val pagerState = rememberPagerState()
         val onboardItemsState by viewModel.onBoardItemsState
 
-        HorizontalPager(
-            modifier = Modifier.fillMaxHeight(0.7f),
-            count = onboardItemsState.size,
-            state = pagerState
-        ) { index ->
-            OnboardPage(item = onboardItemsState[index])
-        }
-
         Column(
-            Modifier.align(Alignment.BottomCenter),
+            Modifier
+                .fillMaxHeight(0.8f)
+                .align(Alignment.TopStart),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            HorizontalPager(
+                modifier = Modifier.weight(10f),
+                count = onboardItemsState.size,
+                state = pagerState
+            ) { index ->
+                OnboardPage(item = onboardItemsState[index])
+            }
 
-            HorizontalPagerIndicator(pagerState = pagerState)
+            Spacer(modifier = Modifier.height(16.dp))
 
-            val resources = LocalContext.current.resources
-            val signUpText = resources.getString(R.string.button_sign_up)
-            val loginText = resources.getString(R.string.button_login)
+            HorizontalPagerIndicator(modifier = Modifier.weight(1f),
+                pagerState = pagerState,
+                activeColor = MaterialTheme.colors.primary,
+                inactiveColor = MaterialTheme.colors.primaryVariant
+            )
+        }
+
+        val resources = LocalContext.current.resources
+        val signUpText = resources.getString(R.string.button_set_up)
+        val buttonVisibility = pagerState.currentPage == pagerState.pageCount - 1
+
+        AnimatedVisibility(
+            visible = buttonVisibility,
+            modifier = Modifier.align(Alignment.BottomCenter),
+            enter = fadeIn(),
+            exit = fadeOut()
+        ) {
             PrimaryLargeButton(
                 text = signUpText,
                 modifier = Modifier
-                    .padding(PaddingValues(16.dp, 16.dp, 16.dp))
+                    .padding(PaddingValues(16.dp))
             ) {
-
-            }
-
-            SecondaryLargeButton(
-                text = loginText,
-                modifier = Modifier
-                    .padding(16.dp)
-            ) {
-                viewModel.login()
-                navController.navigate(Navigation.Home.route)
+                navController.navigate(Navigation.Home.route) {
+                    popUpTo(Navigation.Onboard.route) {
+                        inclusive = true
+                    }
+                }
             }
         }
     }

@@ -6,6 +6,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.beelancrp.finme.onboard.domain.repository.OnBoardRepository
 import com.beelancrp.navigation.domain.model.Navigation
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -13,8 +16,8 @@ class SplashViewModel @Inject constructor(
     private val onBoardRepository: OnBoardRepository
 ) : ViewModel() {
 
-    private val _startDestination = mutableStateOf<Navigation>(Navigation.Onboard)
-    val startDestination: State<Navigation> = _startDestination
+    private val _startDestination = MutableStateFlow<Navigation>(Navigation.Onboard)
+    val startDestination: StateFlow<Navigation> = _startDestination
 
     private val _loading = mutableStateOf(true)
     val loading: State<Boolean> = _loading

@@ -53,6 +53,17 @@ dependencies {
 
     implementation "androidx.datastore:datastore-preferences:$data_store_version"
 
+    // Architectural Components
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+
+    // Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$courutine_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$courutine_version"
+
+    // Coroutine Lifecycle Scopes
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
+
     // Dagger - Hilt
     implementation "com.google.dagger:hilt-android:$dagger_version"
     kapt "com.google.dagger:hilt-android-compiler:$dagger_version"
