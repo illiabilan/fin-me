@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 rootProject.name = "FinMe"
 include ':app'
 include ':ui-kit'
+include ':navigation'
